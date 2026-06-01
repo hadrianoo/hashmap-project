@@ -12,7 +12,7 @@ class HashMap {
       this.buckets[i] = LinkedList();
     }
   }
-  outsideIndexRange(index) {
+  indexOutsideRange(index) {
     if (index < 0 || index >= this.capacity) return true;
     return false;
   }
@@ -31,22 +31,36 @@ class HashMap {
   }
   set(key, value) {
     const index = this.hash(key);
-    if (this.outsideIndexRange(index)) this.indexOutOfBounds();
+    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
     if (this.buckets[index].containsKey(key)) {
-      const listIndex = this.buckets[index].findIndex(key);
-      this.buckets[index].removeAt(listIndex);
+      const toRemoveIndex = this.buckets[index].findIndex(key);
+      this.buckets[index].removeAt(toRemoveIndex);
     }
     this.buckets[index].prepend({ [key]: value });
   }
   get(key) {
     const index = this.hash(key);
-    if (this.outsideIndexRange(index)) this.indexOutOfBounds();
+    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
     return this.buckets[index].find(key);
   }
   has(key) {
     const index = this.hash(key);
-    if (this.outsideIndexRange(index)) this.indexOutOfBounds();
+    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
     return this.buckets[index].containsKey(key);
+  }
+  remove(key) {
+    const index = this.hash(key);
+    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
+
+    if (this.buckets[index].size() === 1) {
+      this.buckets[index] = LinkedList();
+      return true;
+    } else if (this.buckets[index].size() > 1) {
+      const toRemoveIndex = this.buckets[index].findIndex(key);
+      this.buckets[index].removeAt(toRemoveIndex);
+      return true;
+    }
+    return false;
   }
 }
 

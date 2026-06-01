@@ -47,3 +47,19 @@ describe("test has method", () => {
     expect(hashMap.has("onee")).toEqual(false);
   });
 });
+describe("test remove method", () => {
+  test("wrong key", () => {
+    expect(hashMap.remove("bambooo")).toEqual(false);
+  });
+  test("remove key from map", () => {
+    const index = hashMap.hash("bamboo");
+    expect(hashMap.remove("bamboo")).toEqual(true);
+    expect(hashMap.buckets[index].size()).toEqual(0);
+  });
+  test("remove key from map when there is 2 keys in bucket", () => {
+    const index = hashMap.hash("Sita");
+    expect(hashMap.remove("Sita")).toEqual(true);
+    expect(hashMap.buckets[index].at(0)).toEqual({ Rama: 22 });
+    expect(hashMap.buckets[index].size()).toEqual(1);
+  });
+});
