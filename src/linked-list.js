@@ -14,6 +14,7 @@ function LinkedList() {
   }
   return {
     firstNode: null,
+
     isListEmpty() {
       if (this.firstNode === null) return true;
       return false;
@@ -81,6 +82,15 @@ function LinkedList() {
         return head.value;
       }
     },
+    containsKey(key) {
+      if (this.isListEmpty()) return false;
+      let node = this.firstNode;
+      while (nodeExists(node)) {
+        if (Object.keys(node.value)[0] === key) return true;
+        node = node.nextNode;
+      }
+      return false;
+    },
     contains(value) {
       if (this.isListEmpty()) return false;
       let node = this.firstNode;
@@ -90,12 +100,12 @@ function LinkedList() {
       }
       return false;
     },
-    findIndex(value) {
+    findIndex(key) {
       if (this.isListEmpty()) return -1;
       let node = this.firstNode;
       let index = 0;
       while (nodeExists(node)) {
-        if (node.value === value) return index;
+        if (Object.keys(node.value)[0] === key) return index;
         index++;
         node = node.nextNode;
       }
