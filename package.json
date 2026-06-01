@@ -1,5 +1,5 @@
 {
-  "name": "jest-template",
+  "name": "hashmap-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hadrianoo/jest-template.git"
+    "url": "git+https://github.com/hadrianoo/hashmap-project.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/hadrianoo/jest-template/issues"
+    "url": "https://github.com/hadrianoo/hashmap-project/issues"
   },
-  "homepage": "https://github.com/hadrianoo/jest-template#readme",
+  "homepage": "https://github.com/hadrianoo/hashmap-project#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.29.5",
     "@eslint/js": "^10.0.1",
