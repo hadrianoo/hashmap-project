@@ -62,6 +62,13 @@ class HashMap {
     }
     return false;
   }
+  length() {
+    let counter = 0;
+    for (const bucket of this.buckets) {
+      counter += bucket.size();
+    }
+    return counter;
+  }
 }
 
 export { HashMap };
