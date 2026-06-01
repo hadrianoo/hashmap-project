@@ -5,8 +5,13 @@ class HashMap {
   capacity = 16;
   constructor() {
     this.buckets = [];
+    this.initiate();
   }
-
+  initiate() {
+    for (let i = 0; i < this.capacity; i++) {
+      this.buckets[i] = LinkedList();
+    }
+  }
   hash(key) {
     let hashCode = 0;
 
@@ -22,10 +27,7 @@ class HashMap {
     if (index < 0 || index >= this.capacity) {
       throw new Error("Trying to access index out of bounds");
     }
-
-    if (!this.buckets[index]) {
-      this.buckets[index] = LinkedList();
-    } else if (this.buckets[index].containsKey(key)) {
+    if (this.buckets[index].containsKey(key)) {
       const listIndex = this.buckets[index].findIndex(key);
       this.buckets[index].removeAt(listIndex);
     }
@@ -36,8 +38,14 @@ class HashMap {
     if (index < 0 || index >= this.capacity) {
       throw new Error("Trying to access index out of bounds");
     }
-    if (this.buckets[index] === undefined) return null;
     return this.buckets[index].find(key);
+  }
+  has(key) {
+    const index = this.hash(key);
+    if (index < 0 || index >= this.capacity) {
+      throw new Error("Trying to access index out of bounds");
+    }
+    return this.buckets[index].containsKey(key);
   }
 }
 

@@ -6,6 +6,7 @@ beforeEach(() => {
   hashMap.set("one", 2);
   hashMap.set("Rama", 22);
   hashMap.set("Sita", 33);
+  hashMap.set("bamboo", 44);
 });
 afterEach(() => {
   hashMap = null;
@@ -35,5 +36,14 @@ describe("test get method", () => {
   test("if there is two keys in list", () => {
     expect(hashMap.get("Rama")).toEqual(22);
     expect(hashMap.get("Sita")).toEqual(33);
+  });
+});
+
+describe("test has method", () => {
+  test("return true if key exist", () => {
+    expect(hashMap.has("one")).toEqual(true);
+  });
+  test("return false if key does not exist", () => {
+    expect(hashMap.has("onee")).toEqual(false);
   });
 });
