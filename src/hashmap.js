@@ -69,6 +69,9 @@ class HashMap {
     }
     return counter;
   }
+  clear() {
+    this.initiate();
+  }
 }
 
 export { HashMap };

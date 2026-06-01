@@ -65,7 +65,12 @@ describe("test remove method", () => {
 });
 describe("test length method", () => {
   test("length of hash map", () => {
-    hashMap.set("Rama", 55);
     expect(hashMap.length()).toEqual(4);
+  });
+});
+describe("test clear method", () => {
+  test("clear hash map", () => {
+    hashMap.clear();
+    expect(hashMap.length()).toEqual(0);
   });
 });
