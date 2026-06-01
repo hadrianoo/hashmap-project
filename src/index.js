@@ -15,6 +15,10 @@ class HashMap {
     }
     return hashCode;
   }
+  set(key, value) {
+    this.buckets[this.hash(key)] = 
+  }
 }
+
 
 export { HashMap };
