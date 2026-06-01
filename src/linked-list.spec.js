@@ -272,6 +272,37 @@ describe("test findIndex function", () => {
     expect(newList.findIndex(key)).toEqual(2);
   });
 });
+describe("test find function", () => {
+  beforeEach(() => {
+    let fNode = Node();
+    fNode.value = { zero: `000` };
+    newList.firstNode = fNode;
+
+    let sNode = Node();
+    sNode.value = { one: `111` };
+    newList.firstNode.nextNode = sNode;
+
+    let tNode = Node();
+    tNode.value = { two: "222" };
+    newList.firstNode.nextNode.nextNode = tNode;
+  });
+  test("return null", () => {
+    const key = "1234";
+    expect(newList.find(key)).toEqual(null);
+  });
+  test("return 000", () => {
+    const key = `zero`;
+    expect(newList.find(key)).toEqual("000");
+  });
+  test("return 111", () => {
+    const key = `one`;
+    expect(newList.find(key)).toEqual("111");
+  });
+  test("return 222", () => {
+    const key = `two`;
+    expect(newList.find(key)).toEqual("222");
+  });
+});
 
 describe("test toString function", () => {
   test("print list as string", () => {

@@ -18,15 +18,26 @@ class HashMap {
     return hashCode;
   }
   set(key, value) {
-    const hashKey = this.hash(key);
-    if (!this.buckets[hashKey]) {
-      this.buckets[hashKey] = LinkedList();
-    } else if (this.buckets[hashKey].containsKey(key)) {
-      const index = this.buckets[hashKey].findIndex(key);
-      this.buckets[hashKey].removeAt(index);
+    const index = this.hash(key);
+    if (index < 0 || index >= this.capacity) {
+      throw new Error("Trying to access index out of bounds");
     }
-    this.buckets[hashKey].prepend({ [key]: value });
-    console.log(key, value);
+
+    if (!this.buckets[index]) {
+      this.buckets[index] = LinkedList();
+    } else if (this.buckets[index].containsKey(key)) {
+      const listIndex = this.buckets[index].findIndex(key);
+      this.buckets[index].removeAt(listIndex);
+    }
+    this.buckets[index].prepend({ [key]: value });
+  }
+  get(key) {
+    const index = this.hash(key);
+    if (index < 0 || index >= this.capacity) {
+      throw new Error("Trying to access index out of bounds");
+    }
+    if (this.buckets[index] === undefined) return null;
+    return this.buckets[index].find(key);
   }
 }
 

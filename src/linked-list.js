@@ -111,6 +111,16 @@ function LinkedList() {
       }
       return -1;
     },
+    find(key) {
+      if (this.isListEmpty()) return null;
+      let node = this.firstNode;
+      while (nodeExists(node)) {
+        if (Object.keys(node.value)[0] === key)
+          return Object.values(node.value)[0];
+        node = node.nextNode;
+      }
+      return null;
+    },
     toString() {
       if (this.isListEmpty()) return "";
       let node = this.firstNode;
