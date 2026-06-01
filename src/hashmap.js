@@ -12,6 +12,13 @@ class HashMap {
       this.buckets[i] = LinkedList();
     }
   }
+  outsideIndexRange(index) {
+    if (index < 0 || index >= this.capacity) return true;
+    return false;
+  }
+  indexOutOfBounds() {
+    throw new Error("Trying to access index out of bounds");
+  }
   hash(key) {
     let hashCode = 0;
 
@@ -24,9 +31,7 @@ class HashMap {
   }
   set(key, value) {
     const index = this.hash(key);
-    if (index < 0 || index >= this.capacity) {
-      throw new Error("Trying to access index out of bounds");
-    }
+    if (this.outsideIndexRange(index)) this.indexOutOfBounds();
     if (this.buckets[index].containsKey(key)) {
       const listIndex = this.buckets[index].findIndex(key);
       this.buckets[index].removeAt(listIndex);
@@ -35,16 +40,12 @@ class HashMap {
   }
   get(key) {
     const index = this.hash(key);
-    if (index < 0 || index >= this.capacity) {
-      throw new Error("Trying to access index out of bounds");
-    }
+    if (this.outsideIndexRange(index)) this.indexOutOfBounds();
     return this.buckets[index].find(key);
   }
   has(key) {
     const index = this.hash(key);
-    if (index < 0 || index >= this.capacity) {
-      throw new Error("Trying to access index out of bounds");
-    }
+    if (this.outsideIndexRange(index)) this.indexOutOfBounds();
     return this.buckets[index].containsKey(key);
   }
 }
