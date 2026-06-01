@@ -1,0 +1,31 @@
+{
+  "name": "jest-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch --verbose *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadrianoo/jest-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/hadrianoo/jest-template/issues"
+  },
+  "homepage": "https://github.com/hadrianoo/jest-template#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.5",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.3.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.6.0",
+    "jest": "^30.4.2",
+    "prettier": "3.8.3"
+  }
+}
