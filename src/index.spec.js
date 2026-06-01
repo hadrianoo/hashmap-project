@@ -4,6 +4,6 @@ describe("first tests", () => {
   const hashMap = new HashMap();
 
   test("is hash less than 16", () => {
-    expect(hashMap.hash("asdf")).toBeLessThan(16);
+    expect(hashMap.hash("bcvbbbb")).toBeLessThan(16);
   });
 });
