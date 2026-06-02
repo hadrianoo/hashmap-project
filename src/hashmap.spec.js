@@ -94,3 +94,18 @@ describe("test values method", () => {
     expect(hashMap.values()).toEqual([33, 22, 44, 2]);
   });
 });
+
+describe("test entries method", () => {
+  test("return empty array for empty map", () => {
+    hashMap = new HashMap();
+    expect(hashMap.entries()).toEqual([]);
+  });
+  test("return array with map [key, values]", () => {
+    expect(hashMap.entries()).toEqual([
+      ["Sita", 33],
+      ["Rama", 22],
+      ["bamboo", 44],
+      ["one", 2],
+    ]);
+  });
+});

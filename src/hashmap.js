@@ -72,32 +72,28 @@ class HashMap {
   clear() {
     this.initiate();
   }
-  keys() {
+  entries() {
     return this.buckets.reduce((acc, bucket) => {
       if (bucket.size() === 1) {
-        acc.push(...Object.keys(bucket.head()));
+        acc.push(...Object.entries(bucket.head()));
       }
       if (bucket.size() > 1) {
         bucket.toArray().forEach((item) => {
-          acc.push(...Object.keys(item));
+          acc.push(...Object.entries(item));
         });
       }
       return acc;
     }, []);
   }
+  keys() {
+    const entriesArray = this.entries();
+    if (entriesArray.length === 0) return [];
+    return entriesArray.map((item) => item[0]);
+  }
   values() {
-    return this.buckets.reduce((acc, bucket) => {
-      if (bucket.size() === 1) {
-        acc.push(...Object.values(bucket.head()));
-      }
-      if (bucket.size() > 1) {
-        bucket.toArray().forEach((item) => {
-          acc.push(...Object.values(item));
-        });
-      }
-      console.log(acc);
-      return acc;
-    }, []);
+    const entriesArray = this.entries();
+    if (entriesArray.length === 0) return [];
+    return entriesArray.map((item) => item[1]);
   }
 }
 
