@@ -132,6 +132,17 @@ function LinkedList() {
       if (node === null) string += "null";
       return string;
     },
+    toArray() {
+      if (this.isListEmpty()) return [];
+      let node = this.firstNode;
+      let array = [];
+      while (nodeExists(node)) {
+        array.push(node.value);
+        node = node.nextNode;
+      }
+
+      return array;
+    },
     insertAt(index, ...values) {
       if (index > this.size() || index < 0) throw new RangeError();
       const valuesArray = [...values].reverse();

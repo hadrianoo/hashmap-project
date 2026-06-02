@@ -318,6 +318,30 @@ describe("test toString function", () => {
   });
 });
 
+describe("test toArray function", () => {
+  test("return empty array", () => {
+    newList = LinkedList();
+
+    expect(newList.toArray()).toEqual([]);
+  });
+  test("return array with items", () => {
+    newList.append({ dog: 1 });
+    newList.append({ cat: 10 });
+    newList.append({ parrot: 100 });
+    newList.append({ hamster: 1111 });
+    newList.append({ snake: 1123 });
+    newList.append({ turtle: 11211 });
+    expect(newList.toArray()).toEqual([
+      { dog: 1 },
+      { cat: 10 },
+      { parrot: 100 },
+      { hamster: 1111 },
+      { snake: 1123 },
+      { turtle: 11211 },
+    ]);
+  });
+});
+
 describe("test insertAt function", () => {
   beforeEach(() => {
     newList.append("dog");
