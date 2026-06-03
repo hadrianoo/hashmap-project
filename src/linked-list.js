@@ -6,7 +6,7 @@ function Node(value = null, nextNode = null) {
 }
 
 function LinkedList() {
-  function hasNexNode(node) {
+  function hasNextNode(node) {
     return node.nextNode !== null;
   }
   function nodeExists(node) {
@@ -33,7 +33,7 @@ function LinkedList() {
         this.prepend(value);
       } else {
         let node = this.firstNode;
-        while (hasNexNode(node)) {
+        while (hasNextNode(node)) {
           node = node.nextNode;
         }
         node.nextNode = Node(value);
@@ -43,7 +43,7 @@ function LinkedList() {
       if (this.isListEmpty()) return 0;
       let counter = 1;
       let node = this.firstNode;
-      while (hasNexNode(node)) {
+      while (hasNextNode(node)) {
         node = node.nextNode;
         counter++;
       }

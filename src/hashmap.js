@@ -32,7 +32,6 @@ class HashMap {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
       hashCode %= this.capacity;
     }
-    if (this.indexOutOfRange(hashCode)) this.indexOutOfBounds();
     return hashCode;
   }
   growth() {
@@ -42,7 +41,7 @@ class HashMap {
     const oldBucketsEntries = this.entries();
     for (const [key, value] of oldBucketsEntries) {
       const index = this.hash(key);
-      newBuckets[index].prepend({ [key]: value });
+      newBuckets[index].prepend({ key, value });
     }
     this.buckets = newBuckets;
   }
@@ -52,7 +51,7 @@ class HashMap {
       const toRemoveIndex = this.buckets[index].findIndex(key);
       this.buckets[index].removeAt(toRemoveIndex);
     }
-    this.buckets[index].prepend({ [key]: value });
+    this.buckets[index].prepend({ key, value });
     if (this.length() / this.capacity > this.loadFactor) {
       this.growth();
     }
@@ -83,29 +82,23 @@ class HashMap {
     return counter;
   }
   clear() {
+    this.capacity = 16;
     this.initializeBuckets(this.buckets);
   }
   entries() {
     return this.buckets.reduce((acc, bucket) => {
-      if (bucket.size() === 1) {
-        acc.push(...Object.entries(bucket.head()));
-      }
-      if (bucket.size() > 1) {
-        bucket.toArray().forEach((item) => {
-          acc.push(...Object.entries(item));
-        });
-      }
+      bucket.toArray().forEach((item) => {
+        acc.push([item.key, item.value]);
+      });
       return acc;
     }, []);
   }
   keys() {
     const entriesArray = this.entries();
-    if (entriesArray.length === 0) return [];
     return entriesArray.map((item) => item[0]);
   }
   values() {
     const entriesArray = this.entries();
-    if (entriesArray.length === 0) return [];
     return entriesArray.map((item) => item[1]);
   }
 }

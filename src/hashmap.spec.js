@@ -20,8 +20,8 @@ describe("test hash method", () => {
 describe("test set method", () => {
   test("set key:Sita value:33 key:Rama value:22 ", () => {
     const index = hashMap.hash("Rama");
-    expect(hashMap.buckets[index].at(0)).toEqual({ Sita: 33 });
-    expect(hashMap.buckets[index].at(1)).toEqual({ Rama: 22 });
+    expect(hashMap.buckets[index].at(0)).toEqual({ key: "Sita", value: 33 });
+    expect(hashMap.buckets[index].at(1)).toEqual({ key: "Rama", value: 22 });
     expect(hashMap.buckets[index].size()).toEqual(2);
   });
 });
@@ -59,7 +59,7 @@ describe("test remove method", () => {
   test("remove key from map when there is 2 keys in bucket", () => {
     const index = hashMap.hash("Sita");
     expect(hashMap.remove("Sita")).toEqual(true);
-    expect(hashMap.buckets[index].at(0)).toEqual({ Rama: 22 });
+    expect(hashMap.buckets[index].at(0)).toEqual({ key: "Rama", value: 22 });
     expect(hashMap.buckets[index].size()).toEqual(1);
   });
 });
