@@ -101,24 +101,6 @@ describe("test head function", () => {
   });
 });
 
-describe("test tail function", () => {
-  test("when empty return undefined", () => {
-    expect(newList.tail()).toEqual(undefined);
-  });
-  test("return last value in list", () => {
-    let fNode = Node();
-    fNode.value = `i am totally first ele now`;
-    newList.firstNode = fNode;
-
-    let sNode = Node();
-    sNode.value = `i am last ele`;
-    newList.firstNode.nextNode = sNode;
-
-    expect(newList.tail()).toEqual(`i am last ele`);
-    expect(newList.firstNode.nextNode.nextNode).toEqual(null);
-  });
-});
-
 describe("test at function", () => {
   beforeEach(() => {
     let fNode = Node();
@@ -152,31 +134,7 @@ describe("test at function", () => {
     );
   });
 });
-describe("test pop function", () => {
-  test("if empty return undefined", () => {
-    expect(newList.pop()).toEqual(undefined);
-  });
-  test("return head node", () => {
-    let fNode = Node();
-    fNode.value = `i am totally index 0 ele now`;
-    newList.firstNode = fNode;
 
-    let sNode = Node();
-    sNode.value = `i was index 1 ele`;
-    newList.firstNode.nextNode = sNode;
-
-    expect(newList.pop()).toEqual(`i am totally index 0 ele now`);
-    expect(newList.firstNode.value).toEqual(`i was index 1 ele`);
-  });
-  test("return head node", () => {
-    let fNode = Node();
-    fNode.value = `i am totally index 0 ele now`;
-    newList.firstNode = fNode;
-
-    expect(newList.pop()).toEqual(`i am totally index 0 ele now`);
-    expect(newList.firstNode).toEqual(null);
-  });
-});
 describe("test containsKey function", () => {
   beforeEach(() => {
     let fNode = Node();
@@ -206,38 +164,6 @@ describe("test containsKey function", () => {
   test("return true, first node is zero", () => {
     const key = "zero";
     expect(newList.containsKey(key)).toEqual(true);
-  });
-});
-
-describe("test contains function", () => {
-  beforeEach(() => {
-    let fNode = Node();
-    fNode.value = `000`;
-    newList.firstNode = fNode;
-
-    let sNode = Node();
-    sNode.value = `123`;
-    newList.firstNode.nextNode = sNode;
-
-    let tNode = Node();
-    tNode.value = `111`;
-    newList.firstNode.nextNode.nextNode = tNode;
-  });
-  test("return false", () => {
-    const value = "1234";
-    expect(newList.contains(value)).toEqual(false);
-  });
-  test("return true", () => {
-    const value = "123";
-    expect(newList.contains(value)).toEqual(true);
-  });
-  test("return true, last node is 111", () => {
-    const value = "111";
-    expect(newList.contains(value)).toEqual(true);
-  });
-  test("return true, first node is 000", () => {
-    const value = "000";
-    expect(newList.contains(value)).toEqual(true);
   });
 });
 
@@ -341,44 +267,6 @@ describe("test toArray function", () => {
   });
 });
 
-describe("test insertAt function", () => {
-  beforeEach(() => {
-    newList.append("dog");
-    newList.append("cat");
-    newList.append("parrot");
-    newList.append("hamster");
-    newList.append("snake");
-    newList.append("turtle");
-  });
-  test("throw RangeError", () => {
-    expect(() => newList.insertAt(10, 1)).toThrow(RangeError);
-  });
-  test("insert value 10 at index 1", () => {
-    newList.insertAt(1, 10);
-    expect(newList.toString()).toEqual(
-      "( dog ) -> ( 10 ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null",
-    );
-  });
-  test("insert value 10 and 11 start at index 1", () => {
-    newList.insertAt(1, 10, 11);
-    expect(newList.toString()).toEqual(
-      "( dog ) -> ( 10 ) -> ( 11 ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null",
-    );
-  });
-  test("insert value 10 and 11 start at index 6 (last)", () => {
-    newList.insertAt(6, 10, 11);
-    expect(newList.toString()).toEqual(
-      "( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> ( 10 ) -> ( 11 ) -> null",
-    );
-  });
-
-  test("insert value 10 and 11 start at index 0", () => {
-    newList.insertAt(0, 10, 11);
-    expect(newList.toString()).toEqual(
-      "( 10 ) -> ( 11 ) -> ( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null",
-    );
-  });
-});
 describe("test removeAt function", () => {
   beforeEach(() => {
     newList.append("dog");

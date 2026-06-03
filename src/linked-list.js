@@ -53,14 +53,6 @@ function LinkedList() {
       if (this.isListEmpty()) return;
       return this.firstNode.value;
     },
-    tail() {
-      if (this.isListEmpty()) return;
-      let node = this.firstNode;
-      while (hasNexNode(node)) {
-        node = node.nextNode;
-      }
-      return node.value;
-    },
     at(index) {
       if (index >= this.size()) return;
       let node = this.firstNode;
@@ -87,15 +79,6 @@ function LinkedList() {
       let node = this.firstNode;
       while (nodeExists(node)) {
         if (Object.keys(node.value)[0] === key) return true;
-        node = node.nextNode;
-      }
-      return false;
-    },
-    contains(value) {
-      if (this.isListEmpty()) return false;
-      let node = this.firstNode;
-      while (nodeExists(node)) {
-        if (node.value === value) return true;
         node = node.nextNode;
       }
       return false;
@@ -142,35 +125,6 @@ function LinkedList() {
       }
 
       return array;
-    },
-    insertAt(index, ...values) {
-      if (index > this.size() || index < 0) throw new RangeError();
-      const valuesArray = [...values].reverse();
-      if (index === 0) {
-        valuesArray.forEach((item) => this.prepend(item));
-        return;
-      }
-
-      let prev = null;
-      let cur = this.firstNode;
-      let counter = 0;
-
-      for (const item of valuesArray) {
-        while (nodeExists(cur) && counter !== index) {
-          counter++;
-          prev = cur;
-          cur = cur.nextNode;
-        }
-
-        if (cur !== null) {
-          prev.nextNode = Node(item, cur);
-        } else {
-          prev.nextNode = Node(item);
-        }
-        counter = 0;
-        prev = null;
-        cur = this.firstNode;
-      }
     },
     removeAt(index) {
       if (index >= this.size() || index < 0) throw new RangeError();
