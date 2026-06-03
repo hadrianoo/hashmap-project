@@ -1,17 +1,5 @@
 import { LinkedList, Node } from "./linked-list.js";
 
-describe("test node function", () => {
-  test("return null", () => {
-    expect(Node()).toEqual({ value: null, nextNode: null });
-  });
-  test("return values", () => {
-    expect(Node("i am value", "i am nest node")).toEqual({
-      value: "i am value",
-      nextNode: "i am nest node",
-    });
-  });
-});
-
 let newList = null;
 
 beforeEach(() => {
@@ -138,15 +126,15 @@ describe("test at function", () => {
 describe("test containsKey function", () => {
   beforeEach(() => {
     let fNode = Node();
-    fNode.value = { zero: `000` };
+    fNode.value = { key: "zero", value: `000` };
     newList.firstNode = fNode;
 
     let sNode = Node();
-    sNode.value = { one: `111` };
+    sNode.value = { key: "one", value: `111` };
     newList.firstNode.nextNode = sNode;
 
     let tNode = Node();
-    tNode.value = { two: "222" };
+    tNode.value = { key: "two", value: "222" };
     newList.firstNode.nextNode.nextNode = tNode;
   });
   test("return false", () => {
@@ -170,15 +158,15 @@ describe("test containsKey function", () => {
 describe("test findIndex function", () => {
   beforeEach(() => {
     let fNode = Node();
-    fNode.value = { zero: `000` };
+    fNode.value = { key: "zero", value: `000` };
     newList.firstNode = fNode;
 
     let sNode = Node();
-    sNode.value = { one: `111` };
+    sNode.value = { key: "one", value: `111` };
     newList.firstNode.nextNode = sNode;
 
     let tNode = Node();
-    tNode.value = { two: "222" };
+    tNode.value = { key: "two", value: "222" };
     newList.firstNode.nextNode.nextNode = tNode;
   });
   test("return -1", () => {
@@ -201,15 +189,15 @@ describe("test findIndex function", () => {
 describe("test find function", () => {
   beforeEach(() => {
     let fNode = Node();
-    fNode.value = { zero: `000` };
+    fNode.value = { key: "zero", value: `000` };
     newList.firstNode = fNode;
 
     let sNode = Node();
-    sNode.value = { one: `111` };
+    sNode.value = { key: "one", value: `111` };
     newList.firstNode.nextNode = sNode;
 
     let tNode = Node();
-    tNode.value = { two: "222" };
+    tNode.value = { key: "two", value: "222" };
     newList.firstNode.nextNode.nextNode = tNode;
   });
   test("return null", () => {

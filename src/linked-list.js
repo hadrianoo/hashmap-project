@@ -78,7 +78,7 @@ function LinkedList() {
       if (this.isListEmpty()) return false;
       let node = this.firstNode;
       while (nodeExists(node)) {
-        if (Object.keys(node.value)[0] === key) return true;
+        if (node.value.key === key) return true;
         node = node.nextNode;
       }
       return false;
@@ -88,7 +88,7 @@ function LinkedList() {
       let node = this.firstNode;
       let index = 0;
       while (nodeExists(node)) {
-        if (Object.keys(node.value)[0] === key) return index;
+        if (node.value.key === key) return index;
         index++;
         node = node.nextNode;
       }
@@ -98,8 +98,7 @@ function LinkedList() {
       if (this.isListEmpty()) return null;
       let node = this.firstNode;
       while (nodeExists(node)) {
-        if (Object.keys(node.value)[0] === key)
-          return Object.values(node.value)[0];
+        if (node.value.key === key) return node.value.value;
         node = node.nextNode;
       }
       return null;
@@ -123,7 +122,6 @@ function LinkedList() {
         array.push(node.value);
         node = node.nextNode;
       }
-
       return array;
     },
     removeAt(index) {

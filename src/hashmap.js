@@ -6,20 +6,19 @@ class HashMap {
   growthFactor = 2;
   constructor() {
     this.buckets = [];
-    this.initiate(this.buckets);
+    this.initializeBuckets(this.buckets);
   }
 
   getCapacity() {
     return this.capacity;
   }
-  initiate(map) {
+  initializeBuckets(map) {
     for (let i = 0; i < this.capacity; i++) {
       map[i] = LinkedList();
     }
   }
   indexOutOfRange(index) {
-    if (index < 0 || index >= this.capacity) return true;
-    return false;
+    return index < 0 || index >= this.capacity;
   }
   indexOutOfBounds() {
     throw new Error("Trying to access index out of bounds");
@@ -33,12 +32,13 @@ class HashMap {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
       hashCode %= this.capacity;
     }
+    if (this.indexOutOfRange(hashCode)) this.indexOutOfBounds();
     return hashCode;
   }
   growth() {
     this.capacity *= this.growthFactor;
     let newBuckets = [];
-    this.initiate(newBuckets);
+    this.initializeBuckets(newBuckets);
     const oldBucketsEntries = this.entries();
     for (const [key, value] of oldBucketsEntries) {
       const index = this.hash(key);
@@ -48,7 +48,6 @@ class HashMap {
   }
   set(key, value) {
     const index = this.hash(key);
-    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
     if (this.buckets[index].containsKey(key)) {
       const toRemoveIndex = this.buckets[index].findIndex(key);
       this.buckets[index].removeAt(toRemoveIndex);
@@ -60,23 +59,17 @@ class HashMap {
   }
   get(key) {
     const index = this.hash(key);
-    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
     return this.buckets[index].find(key);
   }
   has(key) {
     const index = this.hash(key);
-    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
     return this.buckets[index].containsKey(key);
   }
   remove(key) {
     const index = this.hash(key);
-    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
 
-    if (this.buckets[index].size() === 1) {
-      this.buckets[index] = LinkedList();
-      return true;
-    } else if (this.buckets[index].size() > 1) {
-      const toRemoveIndex = this.buckets[index].findIndex(key);
+    const toRemoveIndex = this.buckets[index].findIndex(key);
+    if (toRemoveIndex >= 0) {
       this.buckets[index].removeAt(toRemoveIndex);
       return true;
     }
@@ -90,7 +83,7 @@ class HashMap {
     return counter;
   }
   clear() {
-    this.initiate(this.buckets);
+    this.initializeBuckets(this.buckets);
   }
   entries() {
     return this.buckets.reduce((acc, bucket) => {
