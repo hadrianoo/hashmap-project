@@ -3,21 +3,36 @@ import { LinkedList } from "./linked-list.js";
 class HashMap {
   loadFactor = 0.75;
   capacity = 16;
+  growthFactor = 2;
   constructor() {
     this.buckets = [];
     this.initiate();
+  }
+  testSize() {
+    let counter = 0;
+    for (const bucket of this.buckets) {
+      counter++;
+      console.log(bucket.size(), counter);
+    }
+  }
+  getCapacity() {
+    return this.capacity;
   }
   initiate() {
     for (let i = 0; i < this.capacity; i++) {
       this.buckets[i] = LinkedList();
     }
   }
-  indexOutsideRange(index) {
+  indexOutOfRange(index) {
     if (index < 0 || index >= this.capacity) return true;
     return false;
   }
   indexOutOfBounds() {
     throw new Error("Trying to access index out of bounds");
+  }
+  growth() {
+    if (this.length() / this.capacity >= this.loadFactor) {
+    }
   }
   hash(key) {
     let hashCode = 0;
@@ -31,7 +46,7 @@ class HashMap {
   }
   set(key, value) {
     const index = this.hash(key);
-    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
+    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
     if (this.buckets[index].containsKey(key)) {
       const toRemoveIndex = this.buckets[index].findIndex(key);
       this.buckets[index].removeAt(toRemoveIndex);
@@ -40,17 +55,17 @@ class HashMap {
   }
   get(key) {
     const index = this.hash(key);
-    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
+    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
     return this.buckets[index].find(key);
   }
   has(key) {
     const index = this.hash(key);
-    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
+    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
     return this.buckets[index].containsKey(key);
   }
   remove(key) {
     const index = this.hash(key);
-    if (this.indexOutsideRange(index)) this.indexOutOfBounds();
+    if (this.indexOutOfRange(index)) this.indexOutOfBounds();
 
     if (this.buckets[index].size() === 1) {
       this.buckets[index] = LinkedList();

@@ -111,22 +111,28 @@ describe("test entries method", () => {
 });
 describe("test growth functionality", () => {
   const map = new HashMap();
-  beforeEach(() => {
-    map.set("apple", "red");
-    map.set("banana", "yellow");
-    map.set("carrot", "orange");
-    map.set("dog", "brown");
-    map.set("elephant", "gray");
-    map.set("frog", "green");
-    map.set("grape", "purple");
-    map.set("hat", "black");
-    map.set("ice cream", "white");
-    map.set("jacket", "blue");
-    map.set("kite", "pink");
-    map.set("lion", "golden");
-  });
+  map.set("apple", "red");
+  map.set("banana", "yellow");
+  map.set("carrot", "orange");
+  map.set("dog", "brown");
+  map.set("elephant", "gray");
+  map.set("frog", "green");
+  map.set("grape", "purple");
+  map.set("hat", "black");
+  map.set("ice cream", "white");
+  map.set("jacket", "blue");
+  map.set("kite", "pink");
+  map.set("lion", "golden");
 
-  test("length should be 16", () => {
+  test("length should be 12", () => {
+    map.testSize();
     expect(map.length()).toEqual(12);
+    expect(map.getCapacity()).toEqual(16);
+  });
+  test("length should be 13", () => {
+    map.set("moon", "silver");
+
+    expect(map.length()).toEqual(13);
+    expect(map.getCapacity()).toEqual(32);
   });
 });

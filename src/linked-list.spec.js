@@ -321,7 +321,6 @@ describe("test toString function", () => {
 describe("test toArray function", () => {
   test("return empty array", () => {
     newList = LinkedList();
-
     expect(newList.toArray()).toEqual([]);
   });
   test("return array with items", () => {
