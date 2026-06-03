@@ -124,15 +124,23 @@ describe("test growth functionality", () => {
   map.set("kite", "pink");
   map.set("lion", "golden");
 
-  test("length should be 12", () => {
-    map.testSize();
+  test("capacity 16 load factor 0.75", () => {
     expect(map.length()).toEqual(12);
     expect(map.getCapacity()).toEqual(16);
+    expect(map.hash("lion")).toEqual(12);
   });
-  test("length should be 13", () => {
+  test("capacity 32 load factor below 0.75", () => {
     map.set("moon", "silver");
 
     expect(map.length()).toEqual(13);
     expect(map.getCapacity()).toEqual(32);
+    expect(map.hash("lion")).toEqual(28);
+  });
+
+  test("can overwrite values", () => {
+    map.set("moon", "silver");
+    expect(map.get("moon")).toEqual("silver");
+    map.set("moon", "gold");
+    expect(map.get("moon")).toEqual("gold");
   });
 });

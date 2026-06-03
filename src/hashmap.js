@@ -6,21 +6,15 @@ class HashMap {
   growthFactor = 2;
   constructor() {
     this.buckets = [];
-    this.initiate();
+    this.initiate(this.buckets);
   }
-  testSize() {
-    let counter = 0;
-    for (const bucket of this.buckets) {
-      counter++;
-      console.log(bucket.size(), counter);
-    }
-  }
+
   getCapacity() {
     return this.capacity;
   }
-  initiate() {
+  initiate(map) {
     for (let i = 0; i < this.capacity; i++) {
-      this.buckets[i] = LinkedList();
+      map[i] = LinkedList();
     }
   }
   indexOutOfRange(index) {
@@ -30,10 +24,7 @@ class HashMap {
   indexOutOfBounds() {
     throw new Error("Trying to access index out of bounds");
   }
-  growth() {
-    if (this.length() / this.capacity >= this.loadFactor) {
-    }
-  }
+
   hash(key) {
     let hashCode = 0;
 
@@ -44,6 +35,17 @@ class HashMap {
     }
     return hashCode;
   }
+  growth() {
+    this.capacity *= this.growthFactor;
+    let newBuckets = [];
+    this.initiate(newBuckets);
+    const oldBucketsEntries = this.entries();
+    for (const [key, value] of oldBucketsEntries) {
+      const index = this.hash(key);
+      newBuckets[index].prepend({ [key]: value });
+    }
+    this.buckets = newBuckets;
+  }
   set(key, value) {
     const index = this.hash(key);
     if (this.indexOutOfRange(index)) this.indexOutOfBounds();
@@ -52,6 +54,9 @@ class HashMap {
       this.buckets[index].removeAt(toRemoveIndex);
     }
     this.buckets[index].prepend({ [key]: value });
+    if (this.length() / this.capacity > this.loadFactor) {
+      this.growth();
+    }
   }
   get(key) {
     const index = this.hash(key);
@@ -85,7 +90,7 @@ class HashMap {
     return counter;
   }
   clear() {
-    this.initiate();
+    this.initiate(this.buckets);
   }
   entries() {
     return this.buckets.reduce((acc, bucket) => {
